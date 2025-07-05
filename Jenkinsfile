@@ -2,7 +2,6 @@ pipeline {
     agent any
 
     options {
-        // 기본 SCM 체크아웃 생략 (필요 시 직접 checkout stage 작성 가능)
         skipDefaultCheckout()
     }
 
