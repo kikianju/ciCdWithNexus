@@ -2,10 +2,16 @@ pipeline {
     agent any
 
     environment {
-        IMAGE_NAME = "localhost:5000/ciCdWithNexusAndJenkins/codereviewbot"
+        IMAGE_NAME = "localhost:5000/cicdwithnexusandjenkins/codereviewbot"
     }
 
     stages {
+        stage('Clone') {
+            steps {
+                git credentialsId: 'github-ssh', url: 'git@github.com:kikianju/ciCdWithNexus.git'
+            }
+        }
+
         stage('Build Docker Image') {
             steps {
                 script {
