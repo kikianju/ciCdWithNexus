@@ -1,12 +1,8 @@
 pipeline {
     agent any
 
-    options {
-        skipDefaultCheckout()
-    }
-
     environment {
-        IMAGE_NAME = "localhost:5001/cicdwithnexusandjenkins/codereviewbot"
+        IMAGE_NAME = "host.docker.internal:5001/cicdwithnexusandjenkins/codereviewbot"
     }
 
     stages {
@@ -21,7 +17,7 @@ pipeline {
         stage('Push to Nexus Registry') {
             steps {
                 script {
-                    docker.withRegistry('http://localhost:5001', 'nexus-cred') {
+                    docker.withRegistry('http://host.docker.internal:5001', 'nexus-cred') {
                         docker.image("${IMAGE_NAME}:latest").push()
                     }
                 }
