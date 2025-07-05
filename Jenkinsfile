@@ -6,13 +6,6 @@ pipeline {
     }
 
     stages {
-        stage('Clone') {
-            steps {
-                // GitHub SSH 키 설정된 credentialsId 사용
-                git branch: 'main', credentialsId: 'github-ssh', url: 'git@github.com:kikianju/ciCdWithNexus.git'
-            }
-        }
-
         stage('Build Docker Image') {
             steps {
                 script {
