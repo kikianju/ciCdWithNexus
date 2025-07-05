@@ -1,6 +1,10 @@
 pipeline {
     agent any
 
+    options {
+        skipDefaultCheckout(true)
+    }
+
     environment {
         IMAGE_NAME = "host.docker.internal:5001/cicdwithnexusandjenkins/codereviewbot"
     }
