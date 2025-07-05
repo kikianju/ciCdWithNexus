@@ -3,6 +3,8 @@ pipeline {
 
     environment {
         IMAGE_NAME = "localhost:5000/ciCdWithNexusAndJenkins/codereviewbot"
+        DOCKER_USERNAME = credentials('nexus-cred-username') // Jenkins에 등록된 Docker ID
+        DOCKER_PASSWORD = credentials('nexus-cred-password') // Jenkins에 등록된 Docker Password
     }
 
     stages {
@@ -20,12 +22,16 @@ pipeline {
             }
         }
 
+        stage('Login to Docker Registry') {
+            steps {
+                sh 'echo "$DOCKER_PASSWORD" | docker login http://localhost:5000 -u $DOCKER_USERNAME --password-stdin'
+            }
+        }
+
         stage('Push to Nexus Registry') {
             steps {
                 script {
-                    docker.withRegistry('http://localhost:5000', 'nexus-cred') {
-                        docker.image("${IMAGE_NAME}:latest").push()
-                    }
+                    docker.image("${IMAGE_NAME}:latest").push()
                 }
             }
         }
