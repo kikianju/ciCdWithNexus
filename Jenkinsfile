@@ -8,7 +8,7 @@ pipeline {
     stages {
         stage('Clone') {
             steps {
-                git credentialsId: 'github-ssh', url: 'git@github.com:kikianju/ciCdWithNexus.git'
+                git branch: 'main', credentialsId: 'github-ssh', url: 'git@github.com:kikianju/ciCdWithNexus.git'
             }
         }
 
