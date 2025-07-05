@@ -6,12 +6,6 @@ pipeline {
     }
 
     stages {
-        stage('Clone') {
-            steps {
-                git branch: 'main', credentialsId: 'github-ssh', url: 'git@github.com:kikianju/ciCdWithNexus.git'
-            }
-        }
-
         stage('Build Docker Image') {
             steps {
                 script {
