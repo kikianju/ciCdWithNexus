@@ -1,6 +1,10 @@
 pipeline {
     agent any
 
+    options {
+        skipDefaultCheckout()
+    }
+
     environment {
         IMAGE_NAME = "localhost:5000/cicdwithnexusandjenkins/codereviewbot"
     }
